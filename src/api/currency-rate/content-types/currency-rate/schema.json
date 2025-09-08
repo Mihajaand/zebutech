@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "currency_rates",
+  "info": {
+    "singularName": "currency-rate",
+    "pluralName": "currency-rates",
+    "displayName": "currency-rate"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "currencyCode": {
+      "type": "string"
+    },
+    "currencyName": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "image": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}
