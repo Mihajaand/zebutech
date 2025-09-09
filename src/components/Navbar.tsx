@@ -113,12 +113,14 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
                 >
                   KesyKely <span className="font-bold">PMS</span>
                 </Link>
-                <Link
-                  to="/site-portail"
+
+                <a
+                  href="https://madagascar-madagascar.com"
+                  target="_blank"
                   className="px-3 py-2 text-blue-900 transition-colors duration-200 hover:text-indigo-800"
                 >
                   Site Portail
-                </Link>
+                </a>
                 <Link
                   to="/contact"
                   className="px-3 py-2 text-blue-900 transition-colors duration-200 hover:text-indigo-800"

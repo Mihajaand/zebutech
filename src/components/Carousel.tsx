@@ -191,7 +191,7 @@ export default function Carousel() {
           <div
             className={`flex transform flex-col gap-6 transition-all delay-1000 duration-1000 md:flex-row ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
           >
-            <button className="group/btn transform rounded-full bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-300 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-yellow-500/25">
+            <button className="group/btn transform cursor-pointer rounded-full bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-300 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-yellow-500/25">
               <span className="group-hover/btn:animate-pulse">
                 Nos Services
               </span>
@@ -201,7 +201,7 @@ export default function Carousel() {
                 const scrollValue = window.innerWidth < 768 ? 500 : 900; // mobile <768px
                 window.scrollBy({ top: scrollValue, behavior: "smooth" });
               }}
-              className="rounded-full border-2 border-white/60 px-8 py-4 text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:-rotate-1 hover:bg-white hover:text-gray-900"
+              className="cursor-pointer rounded-full border-2 border-white/60 px-8 py-4 text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:-rotate-1 hover:bg-white hover:text-gray-900"
             >
               Découvrir Zebutech.com
             </button>

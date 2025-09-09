@@ -19,7 +19,7 @@ export default function AppWrapper() {
   };
 
   return (
-    <div className="pt-[144px]">
+    <div className="max-sm:pt-[60px] sm:pt-[144px]">
       {" "}
       {/* compensation navbars fixes */}
       <NavbarComponent onContactClick={scrollToContact} />

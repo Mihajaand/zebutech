@@ -182,13 +182,13 @@ const ModernCookieConsent = () => {
           <div className="flex flex-col gap-3 rounded-b-2xl border-t border-gray-100 bg-gray-50 p-6 sm:flex-row">
             <button
               onClick={handleRejectAll}
-              className="flex-1 rounded-xl border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 transition-all duration-200 hover:border-gray-400 hover:bg-gray-100"
+              className="flex-1 cursor-pointer rounded-xl border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 transition-all duration-200 hover:border-gray-400 hover:bg-gray-100"
             >
               Rejeter tout
             </button>
             <button
               onClick={handleAcceptAll}
-              className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
+              className="flex-1 cursor-pointer rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
             >
               Accepter tout
             </button>

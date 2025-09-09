@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import Carousel from "../components/Carousel";
 import ContactForm from "../components/ContactForm";
+import Partenaire from "../components/Partenaire";
+import Service from "../components/Service";
+import About from "../components/About";
 
 const Home = ({
   contactRef,
@@ -24,59 +27,7 @@ const Home = ({
       <Carousel />
 
       {/* About Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Une expertise de plus de 25 ans
-            </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              ZEBUTECH, société malgache spécialisée dans la distribution du
-              logiciel INFHOTIK PMS, au service de plus de 580 établissements à
-              travers le monde.
-            </p>
-          </div>
-
-          <div className="mb-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-                <Star className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Simple</h3>
-              <p className="text-gray-600">
-                Interface intuitive et facile à utiliser
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                <Users className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Convivial</h3>
-              <p className="text-gray-600">
-                Conçu pour une expérience utilisateur optimale
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100">
-                <Award className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Performant</h3>
-              <p className="text-gray-600">
-                Des outils puissants pour votre gestion
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
-                <Shield className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Fiable</h3>
-              <p className="text-gray-600">
-                Conforme RGPD avec maintenance 7/7
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <About />
 
       {/* Solutions Section */}
       <section className="bg-white py-20">
@@ -187,58 +138,10 @@ const Home = ({
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              3 en 1 : Un interlocuteur unique
-            </h2>
-            <p className="text-xl text-gray-600">
-              Une meilleure façon de gérer votre Hôtel et Restaurant
-            </p>
-          </div>
+      <Service />
 
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-                <Monitor className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="mb-4 text-center text-xl font-bold">
-                Gestion hôtelière et restauration
-              </h3>
-              <p className="text-center text-gray-600">
-                Solution complète pour la gestion quotidienne de votre
-                établissement
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                <Wifi className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="mb-4 text-center text-xl font-bold">
-                Réservation en ligne avec RESERVIT
-              </h3>
-              <p className="text-center text-gray-600">
-                Booking engine avec interface vers les principales OTA du marché
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100">
-                <Shield className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="mb-4 text-center text-xl font-bold">
-                Service Maintenance 7/7
-              </h3>
-              <p className="text-center text-gray-600">
-                Support technique disponible 24h/24 avec mises à jour gratuites
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* Partners Section */}
+      <Partenaire />
       {/* Contact Section */}
       <div ref={contactRef}>
         <ContactForm />
