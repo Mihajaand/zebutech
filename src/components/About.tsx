@@ -14,21 +14,25 @@ import {
 } from "lucide-react";
 
 // Hook personnalisé pour l'animation du compteur
-const useCountUp = (end, duration = 2000, shouldStart = false) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
+const useCountUp = (
+  end: string | number,
+  duration: number = 2000,
+  shouldStart: boolean = false,
+): string => {
+  const [count, setCount] = useState<number>(0);
+  const [hasStarted, setHasStarted] = useState<boolean>(false);
 
   useEffect(() => {
     if (!shouldStart || hasStarted) return;
 
     setHasStarted(true);
-    let startTime;
+    let startTime: number;
 
-    // Extraire la valeur numérique du string (ex: "25+" -> 25, "24" -> 24)
+    // Extraire la valeur numérique du string (ex: "+35" -> 35, "+170" -> 170)
     const endValue = parseInt(end.toString().replace(/\D/g, ""));
     const startValue = 0;
 
-    const animate = (currentTime) => {
+    const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = (currentTime - startTime) / duration;
 
@@ -46,26 +50,23 @@ const useCountUp = (end, duration = 2000, shouldStart = false) => {
     requestAnimationFrame(animate);
   }, [end, duration, shouldStart, hasStarted]);
 
-  // Reformater le nombre avec le suffixe original
-  const formatCount = () => {
+  // Reformater le nombre avec le préfixe original
+  const formatCount = (): string => {
     const originalString = end.toString();
-
-    // Cas spécial pour "24" - on ajoute "/7"
-    if (originalString === "24") {
-      return count + "/7";
-    }
-
-    const suffix = originalString.replace(/\d/g, ""); // Extraire les caractères non-numériques
-    return count + suffix;
+    const prefix = originalString.replace(/\d/g, ""); // Extraire les caractères non-numériques
+    return prefix + count;
   };
 
   return formatCount();
 };
 
 // Hook pour détecter quand un élément est visible
-const useIntersectionObserver = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef(null);
+const useIntersectionObserver = (): [
+  React.RefObject<HTMLDivElement | null>,
+  boolean,
+] => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const elementRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -92,41 +93,31 @@ const useIntersectionObserver = () => {
   return [elementRef, isVisible];
 };
 
+interface Value {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  color: string;
+  bgColor: string;
+}
+
+interface Country {
+  name: string;
+  code: string;
+}
+
 export default function About() {
   const [statsRef, isStatsVisible] = useIntersectionObserver();
 
-  const stats = [
-    {
-      number: "25+",
-      label: "Années d'expérience",
-      icon: Calendar,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
-    },
-    {
-      number: "750+",
-      label: "Établissements équipés",
-      icon: Building2,
-      color: "text-green-600",
-      bgColor: "bg-green-50",
-    },
-    {
-      number: "6",
-      label: "Pays d'intervention",
-      icon: Globe,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
-    },
-    {
-      number: "24",
-      label: "Support technique",
-      icon: Shield,
-      color: "text-red-600",
-      bgColor: "bg-red-50",
-    },
-  ];
+  // Utilisation des hooks de compteur pour chaque statistique avec préfixes
+  const count35 = useCountUp("+35", 2000, isStatsVisible);
+  const count170 = useCountUp("+170", 2200, isStatsVisible);
+  const count850 = useCountUp("+850", 2400, isStatsVisible);
+  const count6 = useCountUp("6", 1800, isStatsVisible);
+  const count24 = useCountUp("24", 1600, isStatsVisible);
+  const count7 = useCountUp("7", 1400, isStatsVisible);
 
-  const values = [
+  const values: Value[] = [
     {
       icon: Star,
       title: "Simple",
@@ -157,13 +148,22 @@ export default function About() {
     },
   ];
 
-  const countries = [
+  const countries: Country[] = [
     { name: "France", code: "fr" },
     { name: "Madagascar", code: "mg" },
     { name: "Suisse", code: "ch" },
     { name: "Maroc", code: "ma" },
     { name: "Guyane", code: "gf" },
     { name: "Mayotte", code: "yt" },
+  ];
+
+  const features: string[] = [
+    "Conforme RGPD & Législation 2018",
+    "Planning graphique 30 jours",
+    "Interface avec les principales OTA",
+    "Gestion arrhes & acomptes",
+    "Formation incluse",
+    "Maintenance 7/7 - 24h/24h",
   ];
 
   return (
@@ -179,12 +179,17 @@ export default function About() {
             <Heart className="h-4 w-4" />À caractère familiale depuis 1998
           </div>
           <h2 className="mb-6 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-5xl leading-tight font-black text-transparent md:text-6xl">
-            Une expertise de plus de 25 ans
+            Une expertise de plus de 35 ans
           </h2>
           <p className="mx-auto max-w-4xl text-xl leading-relaxed text-gray-600 md:text-2xl">
             ZEBUTECH, société malgache spécialisée dans la distribution du
-            logiciel INFHOTIK PMS, au service de plus de 750 établissements à
-            travers le monde, de taille moyenne, artisanale et familiale.
+            logiciel{" "}
+            <span className="relative inline-block">
+              KESYKELY
+              <sup className="text-md ml-1 text-gray-500">©</sup>
+            </span>{" "}
+            PMS, au service de plus de 170 établissements à travers le monde, de
+            taille moyenne, artisanale et familiale.
           </p>
         </div>
 
@@ -193,40 +198,88 @@ export default function About() {
           ref={statsRef}
           className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
         >
-          {stats.map((stat, index) => {
-            const animatedNumber = useCountUp(
-              stat.number,
-              2000 + index * 200,
-              isStatsVisible,
-            );
+          {/* Stat 1 - Années d'expérience */}
+          <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 transition-transform duration-300 group-hover:scale-110">
+              <Calendar className="h-8 w-8 text-blue-600" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="flex min-h-[80px] items-center font-mono text-3xl font-black text-blue-600 transition-all duration-300 md:text-4xl">
+                {count35}
+              </div>
+              <p className="mt-2 font-semibold text-gray-700">
+                Années d'expérience
+              </p>
+            </div>
+          </div>
 
-            return (
-              <div
-                key={index}
-                className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10"
-                style={{
-                  animationDelay: `${index * 150}ms`,
-                }}
-              >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div
-                  className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${stat.bgColor} transition-transform duration-300 group-hover:scale-110`}
-                >
-                  <stat.icon className={`h-8 w-8 ${stat.color}`} />
-                </div>
-                <div className="relative z-10">
-                  <div
-                    className={`text-3xl font-black ${stat.color} font-mono transition-all duration-300 md:text-4xl`}
-                  >
-                    {animatedNumber}
+          {/* Stat 2 - Établissements équipés */}
+          <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50 transition-transform duration-300 group-hover:scale-110">
+              <Building2 className="h-8 w-8 text-green-600" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="flex min-h-[80px] items-center font-mono text-3xl font-black text-green-600 transition-all duration-300 md:text-4xl">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-center gap-2">
+                    {count170}
+                    <img
+                      src="https://flagcdn.com/w20/mg.png"
+                      alt="Madagascar"
+                      className="h-3 w-4"
+                    />{" "}
+                    <span className="text-sm">(depuis 2022)</span>
                   </div>
-                  <p className="mt-2 font-semibold text-gray-700">
-                    {stat.label}
-                  </p>
+                  <div className="flex items-center justify-center gap-2">
+                    {count850}
+                    <img
+                      src="https://flagcdn.com/w20/fr.png"
+                      alt="France"
+                      className="h-3 w-4"
+                    />
+                    <span className="text-sm">(1999 à 2024)</span>
+                  </div>
                 </div>
               </div>
-            );
-          })}
+              <p className="mt-2 font-semibold text-gray-700">
+                Établissements équipés
+              </p>
+            </div>
+          </div>
+
+          {/* Stat 3 - Pays d'intervention */}
+          <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-50 transition-transform duration-300 group-hover:scale-110">
+              <Globe className="h-8 w-8 text-purple-600" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="flex min-h-[80px] items-center font-mono text-3xl font-black text-purple-600 transition-all duration-300 md:text-4xl">
+                {count6}
+              </div>
+              <p className="mt-2 font-semibold text-gray-700">
+                Pays d'intervention
+              </p>
+            </div>
+          </div>
+
+          {/* Stat 4 - Support technique */}
+          <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 transition-transform duration-300 group-hover:scale-110">
+              <Shield className="h-8 w-8 text-red-600" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="flex min-h-[80px] items-center font-mono text-3xl font-black text-red-600 transition-all duration-300 md:text-4xl">
+                {count24}/{count7}
+              </div>
+              <p className="mt-2 font-semibold text-gray-700">
+                Support technique
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Main Content Grid */}
@@ -244,7 +297,11 @@ export default function About() {
               </h3>
               <div className="space-y-4 text-gray-600">
                 <p className="leading-relaxed">
-                  KESYKELY PMS évolue depuis 1998 au service de plus de 580
+                  <span className="relative inline-block">
+                    KESYKELY
+                    <sup className="ml-1 text-xs text-gray-500">©</sup>
+                  </span>{" "}
+                  PMS évolue depuis 1998 au service de plus de 580
                   établissements installés en France, en Guyane, en Suisse, au
                   Maroc, à Mayotte et maintenant à Madagascar. Une solution
                   pensée par des hôteliers, pour des hôteliers.
@@ -281,7 +338,7 @@ export default function About() {
                 </div>
               </div>
               <p className="leading-relaxed text-gray-600">
-                Avec 30 ans d'expérience dans l'hôtellerie et la restauration,
+                Avec 35 ans d'expérience dans l'hôtellerie et la restauration,
                 notre fondateur a développé une vision claire : proposer des
                 outils simples, performants et accessibles pour tous les types
                 d'établissements.
@@ -323,14 +380,7 @@ export default function About() {
                 Solution complète
               </h3>
               <div className="space-y-3">
-                {[
-                  "Conforme RGPD & Législation 2018",
-                  "Planning graphique 30 jours",
-                  "Interface avec les principales OTA",
-                  "Gestion arrhes & acomptes",
-                  "Formation incluse",
-                  "Maintenance 7/7 - 24h/24h",
-                ].map((feature, index) => (
+                {features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500" />
                     <span className="text-gray-600">{feature}</span>

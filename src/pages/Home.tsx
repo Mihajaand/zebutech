@@ -1,16 +1,4 @@
-import {
-  Star,
-  Users,
-  Award,
-  Shield,
-  Smartphone,
-  Monitor,
-  Wifi,
-  Phone,
-  MapPin,
-  Check,
-  ArrowRight,
-} from "lucide-react";
+import { Smartphone, Monitor, Check, ArrowRight } from "lucide-react";
 import Carousel from "../components/Carousel";
 import ContactForm from "../components/ContactForm";
 import Partenaire from "../components/Partenaire";
@@ -48,7 +36,11 @@ const Home = ({
                 <Monitor className="mr-4 h-10 w-10 text-blue-600" />
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">
-                    INFHOTIK PMS V6
+                    <span className="relative inline-block">
+                      KESYKELY
+                      <sup className="ml-1 text-xs text-gray-500">©</sup>
+                    </span>{" "}
+                    PMS
                   </h3>
                   <p className="font-medium text-blue-600">100% FRANÇAIS 🇫🇷</p>
                 </div>
@@ -97,7 +89,12 @@ const Home = ({
               <div className="mb-6 flex items-center">
                 <Smartphone className="mr-4 h-10 w-10 text-green-600" />
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">KesyKely</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    <span className="relative inline-block">
+                      KESYKELY
+                      <sup className="ml-1 text-xs text-gray-500">©</sup>
+                    </span>{" "}
+                  </h3>
                   <p className="font-medium text-green-600">100% MALAGASY 🇲🇬</p>
                 </div>
               </div>

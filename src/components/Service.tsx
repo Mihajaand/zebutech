@@ -51,7 +51,7 @@ export default function Service() {
       id: "kesykely",
       logo: kesykely,
       title: "KESYKELY",
-      subtitle: "Solution POS Mobile",
+      subtitle: "Solution PMS-POS",
       description:
         "L'outil tout-terrain conçu à Madagascar. Facturation, réservation de table, gestion stock sur smartphone et tablette.",
       features: [

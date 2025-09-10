@@ -1,6 +1,7 @@
 import { Send } from "lucide-react";
 import { useState } from "react";
 import AsideComponent from "./contact/AsideComponent";
+import { countries } from "../data/tel";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function ContactForm() {
     civilite: "",
     nomPrenom: "",
     email: "",
+    countryCode: "+261",
     telephone: "",
     message: "",
   });
@@ -22,7 +24,6 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ici tu peux remplacer par un appel API ou envoi via email
     alert("Message envoyé ! Nous vous contacterons bientôt.");
     console.log("formData:", formData);
   };
@@ -38,6 +39,10 @@ export default function ContactForm() {
     "Boutiques",
     "Vente à emporter",
   ];
+
+  const selectedCountry = countries.find(
+    (c) => c.code === formData.countryCode,
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-indigo-50 to-indigo-100">
@@ -61,18 +66,7 @@ export default function ContactForm() {
 
         {/* Right - Form */}
         <main className="w-full rounded-3xl border border-indigo-100 bg-white p-6 shadow-2xl backdrop-blur-sm sm:p-8 md:p-10 lg:w-1/2 lg:w-screen">
-          <div className="mb-6 text-sm sm:mb-8 sm:text-base">
-            <p className="mb-4 text-gray-700 sm:mb-6">
-              Vous êtes interessé(e) par notre solution logicielle ?
-              Contactez-nous.
-            </p>
-            <p className="text-gray-600">
-              <span className="font-bold text-indigo-600">Parrainage</span> :
-              Indiquez qui vous a conseillé la solution.
-            </p>
-          </div>
-
-          <form
+          <div
             onSubmit={handleSubmit}
             className="space-y-6 text-sm sm:text-base"
           >
@@ -93,7 +87,7 @@ export default function ContactForm() {
                     value={formData.type}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   >
                     <option value="">
                       Sélectionnez votre type d'établissement
@@ -122,7 +116,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Nom de votre établissement"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   />
                 </div>
 
@@ -142,7 +136,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Ville, région..."
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   />
                 </div>
 
@@ -161,12 +155,12 @@ export default function ContactForm() {
                     value={formData.parrain}
                     onChange={handleChange}
                     placeholder="Établissement ou personne qui vous a conseillé"
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   />
                 </div>
               </div>
 
-              {/* Colonne droite (champs 1 par 1) */}
+              {/* Colonne droite */}
               <div className="space-y-6">
                 {/* Civilité */}
                 <div>
@@ -182,7 +176,7 @@ export default function ContactForm() {
                     value={formData.civilite}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   >
                     <option value="">--</option>
                     <option value="M.">M.</option>
@@ -206,7 +200,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Votre nom et prénom"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   />
                 </div>
 
@@ -226,7 +220,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="votre@email.com"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   />
                 </div>
 
@@ -238,21 +232,110 @@ export default function ContactForm() {
                   >
                     Téléphone *
                   </label>
-                  <input
-                    id="telephone"
-                    name="telephone"
-                    type="tel"
-                    value={formData.telephone}
-                    onChange={handleChange}
-                    placeholder="+261..."
-                    required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
-                  />
+                  <div className="flex items-stretch gap-3">
+                    {/* Sélecteur de pays avec drapeau et code */}
+                    <div className="relative">
+                      <select
+                        name="countryCode"
+                        value={formData.countryCode}
+                        onChange={handleChange}
+                        className="h-full w-[120px] cursor-pointer appearance-none rounded-xl border-2 border-gray-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 py-3 pr-9 pl-14 text-transparent transition-all duration-200 hover:shadow-md focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                        style={{
+                          backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "right 10px center",
+                          backgroundSize: "18px",
+                        }}
+                      >
+                        {countries.map((country) => (
+                          <option
+                            key={country.iso}
+                            value={country.code}
+                            className="text-blue-900"
+                          >
+                            {country.name} :
+                            <span className="text-2xl font-bold">
+                              {" "}
+                              {country.code}
+                            </span>
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Affichage du drapeau et code sélectionné par-dessus le select */}
+                      <div className="pointer-events-none absolute top-1/2 left-3 flex -translate-y-1/2 transform items-center gap-2.5">
+                        {selectedCountry && (
+                          <>
+                            <img
+                              src={`https://flagcdn.com/24x18/${selectedCountry.iso}.png`}
+                              alt={selectedCountry.name}
+                              className="h-5 w-7 rounded-sm object-cover"
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                              }}
+                            />
+                            <span className="text-sm font-bold tracking-wide text-gray-800">
+                              {selectedCountry.code}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Indicateur de focus/hover */}
+                      <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/0 to-blue-500/0 transition-all duration-200 hover:from-indigo-500/5 hover:to-blue-500/5" />
+                    </div>
+
+                    {/* Input numéro de téléphone */}
+                    <input
+                      name="telephone"
+                      type="tel"
+                      value={formData.telephone}
+                      onChange={handleChange}
+                      placeholder="034 34 334 34"
+                      required
+                      className="w-[200px] flex-1 rounded-xl border-2 border-gray-200 px-4 py-3 font-mono text-lg tracking-wider text-gray-900 transition-all duration-200 hover:border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Exemple et validation */}
+                  <div className="mt-2 flex items-center justify-between">
+                    <label className="flex items-center gap-1 text-xs text-gray-500">
+                      <input
+                        type="checkbox"
+                        name="choix"
+                        value="oui"
+                        className="form-radio text-md"
+                      />
+                      Ce téléphone à une compte WhatssApp ?
+                    </label>
+                    {formData.telephone && (
+                      <div className="flex gap-4">
+                        <label className="inline-flex items-center gap-1">
+                          <input
+                            type="radio"
+                            name="choix"
+                            value="oui"
+                            className="form-radio text-xs"
+                          />
+                          OUI
+                        </label>
+                        <label className="inline-flex items-center gap-1">
+                          <input
+                            type="radio"
+                            name="choix"
+                            value="non"
+                            className="form-radio"
+                          />
+                          NON
+                        </label>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Message (full width) */}
+            {/* Message */}
             <div>
               <label
                 htmlFor="message"
@@ -267,20 +350,20 @@ export default function ContactForm() {
                 onChange={handleChange}
                 rows={5}
                 placeholder="Décrivez vos besoins spécifiques..."
-                className="w-full resize-none rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 focus:border-indigo-400"
+                className="w-full resize-none rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
               />
             </div>
 
             {/* Submit */}
             <div>
               <button
-                type="submit"
+                onClick={handleSubmit}
                 className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-3 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 sm:px-8 sm:py-4 sm:text-lg"
               >
                 <Send className="mr-2 h-5 w-5 sm:mr-3" /> Envoyer le message
               </button>
             </div>
-          </form>
+          </div>
         </main>
       </div>
     </div>

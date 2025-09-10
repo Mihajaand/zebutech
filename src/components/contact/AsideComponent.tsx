@@ -71,15 +71,23 @@ export default function AsideComponent() {
         <ul className="space-y-2 text-sm sm:space-y-3 sm:text-base">
           <li className="flex items-center">
             <span className="mr-2 h-2 w-2 rounded-full bg-white" />
-            INFHOTIK PMS - Gestion Hôtelière
+            <span className="relative inline-block">
+              KESYKELY
+              <sup className="mr-1 ml-0.5 text-xs text-white">©</sup>
+            </span>{" "}
+            PMS - Gestion Hôtelière
           </li>
           <li className="flex items-center">
             <span className="mr-2 h-2 w-2 rounded-full bg-white" />
-            KesyKely - Point de Vente Restaurant
+            <span className="relative inline-block">
+              KESYKELY
+              <sup className="mr-1 ml-0.5 text-xs text-white">©</sup>
+            </span>{" "}
+            POS - Point de Vente
           </li>
           <li className="flex items-center">
             <span className="mr-2 h-2 w-2 rounded-full bg-white" />
-            750+ établissements nous font confiance
+            170+ établissements nous font confiance
           </li>
         </ul>
       </div>
@@ -88,11 +96,11 @@ export default function AsideComponent() {
         <div className="inline-flex items-center rounded-full border border-indigo-100 bg-white px-6 py-3 shadow-lg">
           <div className="mr-3 h-3 w-3 animate-pulse rounded-full bg-indigo-400" />
           <span className="text-sm font-semibold text-gray-800 sm:text-base">
-            Plus de 20 ans d'expérience
+            Plus de 35 ans d'expérience
           </span>
           <div className="mx-3 h-4 w-px bg-indigo-200" />
           <span className="text-sm font-semibold text-gray-800 sm:text-base">
-            750+ établissements
+            170+ établissements
           </span>
         </div>
       </div>
