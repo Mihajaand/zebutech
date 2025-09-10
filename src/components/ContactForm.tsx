@@ -299,36 +299,16 @@ export default function ContactForm() {
 
                   {/* Exemple et validation */}
                   <div className="mt-2 flex items-center justify-between">
-                    <label className="flex items-center gap-1 text-xs text-gray-500">
-                      <input
-                        type="checkbox"
-                        name="choix"
-                        value="oui"
-                        className="form-radio text-md"
-                      />
-                      Ce téléphone à une compte WhatssApp ?
-                    </label>
                     {formData.telephone && (
-                      <div className="flex gap-4">
-                        <label className="inline-flex items-center gap-1">
-                          <input
-                            type="radio"
-                            name="choix"
-                            value="oui"
-                            className="form-radio text-xs"
-                          />
-                          OUI
-                        </label>
-                        <label className="inline-flex items-center gap-1">
-                          <input
-                            type="radio"
-                            name="choix"
-                            value="non"
-                            className="form-radio"
-                          />
-                          NON
-                        </label>
-                      </div>
+                      <label className="flex items-center gap-1 text-xs text-gray-500 italic">
+                        <input
+                          type="checkbox"
+                          name="choix"
+                          value="oui"
+                          className="form-radio text-md accent-green-500"
+                        />
+                        Ce numéro à un compte WhatsApp ?
+                      </label>
                     )}
                   </div>
                 </div>
