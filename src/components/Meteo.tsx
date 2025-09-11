@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useLocalization } from "../contexts/LocalizationProvider";
 
 interface WeatherData {
   name: string;
@@ -12,14 +11,6 @@ const API_KEY = "7c029857079e8059cd70a11d78c33ab5";
 
 export default function Meteo() {
   // Ajout d'une vérification de sécurité pour le contexte
-  let trad: (key: string) => string;
-  try {
-    const { trad: tradFunc } = useLocalization();
-    trad = tradFunc;
-  } catch (error) {
-    // Si le contexte n'est pas disponible, utiliser une fonction fallback
-    trad = (key: string) => key;
-  }
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
@@ -129,9 +120,7 @@ export default function Meteo() {
   if (!weather) {
     return (
       <div className="flex w-full items-center justify-center py-2">
-        <div className="text-sm text-gray-600">
-          {trad("loadingText") || "Chargement..."}
-        </div>
+        <div className="text-sm text-gray-600">Chargement...</div>
       </div>
     );
   }
@@ -144,17 +133,16 @@ export default function Meteo() {
       <div className="hidden w-full items-center justify-between gap-4 px-4 py-2 sm:flex">
         <div className="min-w-0 flex-1">
           <h2 className="truncate text-xs font-bold text-gray-800">
-            {trad(weather.name) || weather.name}
+            {weather.name}
           </h2>
         </div>
 
         <div className="min-w-0 flex-1">
           <p className="truncate text-xs text-gray-600 capitalize">
-            {trad(weather.weather[0]?.description) ||
-              weather.weather[0]?.description}
+            {weather.weather[0]?.description}
           </p>
           <p className="text-xs text-gray-600">
-            {trad("vent") || "Vent"} {weather.wind?.speed || 0} m/s
+            Vent {weather.wind?.speed || 0} m/s
           </p>
         </div>
 
@@ -178,18 +166,17 @@ export default function Meteo() {
         {/* Ville */}
         <div className="flex-1 text-left">
           <h2 className="truncate text-sm font-semibold text-gray-800">
-            {trad(weather.name) || weather.name}
+            {weather.name}
           </h2>
         </div>
 
         {/* Description et vent */}
         <div className="flex flex-1 flex-col items-center text-center">
           <p className="truncate text-xs text-gray-600 capitalize">
-            {trad(weather.weather[0]?.description) ||
-              weather.weather[0]?.description}
+            {weather.weather[0]?.description}
           </p>
           <p className="text-xs text-gray-600">
-            {trad("vent") || "Vent"} {weather.wind?.speed || 0} m/s
+            Vent {weather.wind?.speed || 0} m/s
           </p>
         </div>
 

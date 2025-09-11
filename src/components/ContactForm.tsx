@@ -253,11 +253,7 @@ export default function ContactForm() {
                             value={country.code}
                             className="text-blue-900"
                           >
-                            {country.name} :
-                            <span className="text-2xl font-bold">
-                              {" "}
-                              {country.code}
-                            </span>
+                            {country.name} : {country.code}
                           </option>
                         ))}
                       </select>

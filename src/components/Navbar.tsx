@@ -278,14 +278,12 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
         </div>
       </div>
 
-      <LocalizationProvider>
-        <CountrySelectorPopup
-          show={openPopup}
-          onClose={() => setOpenPopup(false)}
-          selected={visiblePays}
-          onUpdate={(updated) => setVisiblePays(updated)}
-        />
-      </LocalizationProvider>
+      <CountrySelectorPopup
+        show={openPopup}
+        onClose={() => setOpenPopup(false)}
+        selected={visiblePays}
+        onUpdate={(updated) => setVisiblePays(updated)}
+      />
     </>
   );
 }

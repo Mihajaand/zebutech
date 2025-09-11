@@ -14,6 +14,7 @@ import kesyBar from "./../assets/img/kesykely/nobgbar.png";
 import kesyTablette from "./../assets/img/kesykely/nobgtablette.png";
 import kesyMateriel from "./../assets/img/kesykely/materiel-kesy-kely.jpg";
 import planning from "./../assets/img/kesykely/planning.png";
+import Banner from "./Banner";
 
 export default function Solution() {
   return (
@@ -27,6 +28,7 @@ export default function Solution() {
             Des outils adaptés à tous vos besoins
           </p>
         </div>
+        <Banner />
         {/* Section planning - Image centrée */}
         <div className="mb-16">
           <div className="mb-8 text-center">
@@ -43,7 +45,7 @@ export default function Solution() {
             <img
               src={planning}
               alt="Matériel KESYKELY"
-              className="h-auto w-[1500px] rounded-2xl transition-transform duration-500 hover:scale-105"
+              className="h-auto w-[1400px] rounded-2xl transition-transform duration-500 hover:scale-105"
             />
           </div>
         </div>
@@ -70,9 +72,9 @@ export default function Solution() {
         </div>
 
         {/* Section Applications Mobile - Responsive */}
-        <div className="mb-16 rounded-3xl border-2 border-blue-100 bg-white p-6 shadow-xl md:p-12">
-          <div className="mb-8 text-center md:mb-12">
-            <h2 className="mb-4 flex items-center justify-center text-2xl font-bold text-blue-900 md:text-3xl">
+        <div className="mb-16 rounded-3xl border-2 border-gray-50 bg-white p-6 shadow-xl md:p-12">
+          <div className="mb-8 text-center md:mb-2">
+            <h2 className="mb-4 flex items-center justify-center text-2xl font-bold text-blue-900 md:mt-[-40px]! md:text-3xl">
               <Smartphone className="mr-4 h-6 w-6 text-blue-600 md:h-8 md:w-8" />
               Applications Mobile
             </h2>
@@ -89,7 +91,7 @@ export default function Solution() {
                 <img
                   src={kesyMobileTicket}
                   alt="Ticket Mobile"
-                  className="mx-auto h-auto w-[400px] transition-transform duration-500 hover:scale-105"
+                  className="mx-auto h-auto w-[350px] transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <h3 className="mx-2 mb-2 text-xl font-bold text-blue-900">
@@ -106,7 +108,7 @@ export default function Solution() {
                 <img
                   src={kesyBoutik}
                   alt="Boutique Mobile"
-                  className="mx-auto h-auto w-[400px] transition-transform duration-500 hover:scale-105"
+                  className="mx-auto h-auto w-[350px] transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <h3 className="mb-2 text-xl font-bold text-blue-900">
@@ -123,7 +125,7 @@ export default function Solution() {
                 <img
                   src={kesyBar}
                   alt="Bar Mobile"
-                  className="mx-auto h-auto w-[400px] transition-transform duration-500 hover:scale-105"
+                  className="mx-auto h-auto w-[350px] transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <h3 className="mb-2 text-xl font-bold text-blue-900">
