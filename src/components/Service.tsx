@@ -1,12 +1,4 @@
-import {
-  Monitor,
-  Shield,
-  Wifi,
-  CheckCircle,
-  Users,
-  Calendar,
-  Search,
-} from "lucide-react";
+import { Monitor, Shield, CheckCircle, Users, Search } from "lucide-react";
 import logoZebutech from "../assets/logo/zebutech-logo.png";
 import kesykely from "../assets/logo/kesykely-logo.png";
 import madagascar from "../assets/logo/logos-portail-pc.png";

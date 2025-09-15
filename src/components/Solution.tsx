@@ -3,16 +3,12 @@ import {
   BarChart3,
   Check,
   Monitor,
-  ShoppingCart,
   Smartphone,
-  Users,
 } from "lucide-react";
-import kesykelyLogo from "./../assets/logo/kesykely-logo.png";
 import kesyMobileTicket from "./../assets/img/kesykely/nobgticket.png";
 import kesyBoutik from "./../assets/img/kesykely/nobgboutik.png";
 import kesyBar from "./../assets/img/kesykely/nobgbar.png";
 import kesyTablette from "./../assets/img/kesykely/nobgtablette.png";
-import kesyMateriel from "./../assets/img/kesykely/materiel-kesy-kely.jpg";
 import planning from "./../assets/img/kesykely/planning.png";
 import Banner from "./Banner";
 

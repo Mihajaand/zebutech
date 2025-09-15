@@ -6,12 +6,10 @@ import About from "../components/About";
 import Solution from "../components/Solution";
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const Home = ({
-  contactRef,
-}: {
-  contactRef: React.RefObject<HTMLDivElement>;
-}) => {
+interface HomeProps {
+  contactRef: React.RefObject<HTMLDivElement | null>;
+}
+const Home = ({ contactRef }: HomeProps) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   const scrollToTop = () => {

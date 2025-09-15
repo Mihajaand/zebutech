@@ -269,7 +269,7 @@ const NotFound = () => {
       <div className="bg-gradient-radial pointer-events-none absolute inset-0 from-transparent via-transparent to-indigo-100/30" />
 
       {/* Styles CSS pour les animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%,
           100% {

@@ -53,7 +53,7 @@ export default function CountrySelectorPopup({
   return (
     <Modal show={show} onClose={onClose} size="xl" className="max-sm:mt-12">
       <ModalHeader className="flex items-center justify-center sm:text-[8px]!">
-        affichePays
+        Liste des Pays à afficher
       </ModalHeader>
       <ModalBody>
         <input

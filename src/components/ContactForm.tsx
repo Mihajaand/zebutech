@@ -3,8 +3,29 @@ import { useState } from "react";
 import AsideComponent from "./contact/AsideComponent";
 import { countries } from "../data/tel";
 
+// Interface pour les données du formulaire
+interface FormData {
+  type: string;
+  nom: string;
+  lieu: string;
+  parrain: string;
+  civilite: string;
+  nomPrenom: string;
+  email: string;
+  countryCode: string;
+  telephone: string;
+  message: string;
+}
+
+// Interface pour les pays (à ajuster selon votre structure de données)
+interface Country {
+  iso: string;
+  code: string;
+  name: string;
+}
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     type: "",
     nom: "",
     lieu: "",
@@ -17,19 +38,21 @@ export default function ContactForm() {
     message: "",
   });
 
-  const [isCaptchaChecked, setIsCaptchaChecked] = useState(false);
-  const [captchaLoading, setCaptchaLoading] = useState(false);
+  const [isCaptchaChecked, setIsCaptchaChecked] = useState<boolean>(false);
+  const [captchaLoading, setCaptchaLoading] = useState<boolean>(false);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // const handleCaptchaChange = (e) => {
-  //   setIsCaptchaChecked(e.target.checked);
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.preventDefault();
 
     if (!isCaptchaChecked) {
@@ -55,11 +78,11 @@ export default function ContactForm() {
     "Vente à emporter",
   ];
 
-  const selectedCountry = countries.find(
-    (c) => c.code === formData.countryCode,
+  const selectedCountry: Country | undefined = countries.find(
+    (c: Country) => c.code === formData.countryCode,
   );
 
-  const handleCaptchaChange = (e) => {
+  const handleCaptchaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     if (checked) {
       setCaptchaLoading(true);
@@ -95,7 +118,7 @@ export default function ContactForm() {
 
         {/* Right - Form */}
         <main className="w-full rounded-3xl border border-indigo-100 bg-white p-6 shadow-2xl backdrop-blur-sm sm:p-8 md:p-10 lg:w-1/2 lg:w-screen">
-          <div
+          <form
             onSubmit={handleSubmit}
             className="space-y-6 text-sm sm:text-base"
           >
@@ -276,8 +299,8 @@ export default function ContactForm() {
                           backgroundSize: "18px",
                         }}
                       >
-                        {countries.map((country, index) => (
-                          <div>
+                        {countries.map((country: Country, index: number) => (
+                          <>
                             <option
                               key={country.iso}
                               value={country.code}
@@ -287,7 +310,7 @@ export default function ContactForm() {
                             </option>
 
                             {index === 5 && <hr />}
-                          </div>
+                          </>
                         ))}
                       </select>
 
@@ -299,8 +322,11 @@ export default function ContactForm() {
                               src={`https://flagcdn.com/24x18/${selectedCountry.iso}.png`}
                               alt={selectedCountry.name}
                               className="h-5 w-7 rounded-sm object-cover"
-                              onError={(e) => {
-                                e.target.style.display = "none";
+                              onError={(
+                                e: React.SyntheticEvent<HTMLImageElement>,
+                              ) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
                               }}
                             />
                             <span className="text-sm font-bold tracking-wide text-gray-800">
@@ -410,7 +436,7 @@ export default function ContactForm() {
             {/* Submit */}
             <div>
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={!isCaptchaChecked || captchaLoading}
                 className={`flex w-full items-center justify-center rounded-xl px-6 py-3 text-base font-bold shadow-lg transition-all duration-200 sm:px-8 sm:py-4 sm:text-lg ${
                   isCaptchaChecked && !captchaLoading
@@ -426,7 +452,7 @@ export default function ContactForm() {
                     : "Vérifiez le captcha"}
               </button>
             </div>
-          </div>
+          </form>
         </main>
       </div>
     </div>

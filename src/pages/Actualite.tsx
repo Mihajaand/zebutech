@@ -167,7 +167,11 @@ const Actualite = () => {
   }, []);
 
   const formatDate = (dateString: any) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     return new Date(dateString).toLocaleDateString("fr-FR", options);
   };
 

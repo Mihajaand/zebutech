@@ -2,10 +2,6 @@ import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FaMailBulk, FaPhone } from "react-icons/fa";
 
-// Logo simulé
-const logoZebutech =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' fill='%234f46e5' rx='8'/%3E%3Ctext x='60' y='35' text-anchor='middle' fill='white' font-family='Arial' font-size='16' font-weight='bold'%3EZebutech%3C/text%3E%3C/svg%3E";
-
 // Images exotiques claires de Madagascar
 const images = [
   {
@@ -47,7 +43,7 @@ const images = [
 ];
 
 // Hook personnalisé pour l'effet de frappe
-function useTypewriter(text, speed = 100, startDelay = 500) {
+function useTypewriter(text: string, speed = 100, startDelay = 500) {
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
