@@ -4,17 +4,36 @@ import {
   ArrowLeft,
   Search,
   Zap,
-  Ghost,
   Sparkles,
   Navigation,
 } from "lucide-react";
-// import logoZebutech from "../assets/logo/zebutech-logo.png";
+
+// Typages pour les particules et éléments flottants
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+  delay: number;
+}
+
+interface FloatingElement {
+  id: number;
+  x: number;
+  y: number;
+  rotation: number;
+  scale: number;
+  duration: number;
+}
 
 const NotFound = () => {
   const [glitchActive, setGlitchActive] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [particles, setParticles] = useState([]);
-  const [floatingElements, setFloatingElements] = useState([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [floatingElements, setFloatingElements] = useState<FloatingElement[]>(
+    [],
+  );
 
   useEffect(() => {
     // Effet glitch aléatoire
@@ -23,8 +42,8 @@ const NotFound = () => {
       setTimeout(() => setGlitchActive(false), 150);
     }, 4000);
 
-    // Générer des particules géométriques flottantes
-    const particlesArray = Array.from({ length: 15 }, (_, i) => ({
+    // Générer des particules
+    const particlesArray: Particle[] = Array.from({ length: 15 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -34,21 +53,24 @@ const NotFound = () => {
     }));
     setParticles(particlesArray);
 
-    // Éléments flottants géométriques
-    const floatingArray = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 90 + 5,
-      y: Math.random() * 90 + 5,
-      rotation: Math.random() * 360,
-      scale: Math.random() * 0.5 + 0.5,
-      duration: Math.random() * 20 + 10,
-    }));
+    // Générer des éléments flottants
+    const floatingArray: FloatingElement[] = Array.from(
+      { length: 8 },
+      (_, i) => ({
+        id: i,
+        x: Math.random() * 90 + 5,
+        y: Math.random() * 90 + 5,
+        rotation: Math.random() * 360,
+        scale: Math.random() * 0.5 + 0.5,
+        duration: Math.random() * 20 + 10,
+      }),
+    );
     setFloatingElements(floatingArray);
 
     return () => clearInterval(glitchInterval);
   }, []);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
       x: (e.clientX - rect.left) / rect.width,

@@ -7,7 +7,7 @@ export default function Partenaire() {
     },
     {
       name: "Thaïs PMS",
-      src: "https://thais-pms.com/_nuxt/img/f209ae1.svg",
+      src: "https://thais-pms.com/_nuxt/img/7bca891.svg",
       description: "PMS Solution",
     },
     {

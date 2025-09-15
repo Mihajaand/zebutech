@@ -188,15 +188,15 @@ export default function About() {
               KESYKELY
               <sup className="text-md ml-1 text-gray-500">©</sup>
             </span>{" "}
-            PMS, au service de plus de 170 établissements à travers le monde, de
-            taille moyenne, artisanale et familiale.
+            PMS - POS, au service de plus de 170 établissements sur tout
+            Madagascar, de taille moyenne, artisanale et familiale.
           </p>
         </div>
 
         {/* Stats Section with Animation */}
         <div
           ref={statsRef}
-          className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-5"
         >
           {/* Stat 1 - Années d'expérience */}
           <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
@@ -214,7 +214,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Stat 2 - Établissements équipés */}
+          {/* Stat 2 - Établissements Zebutech */}
           <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50 transition-transform duration-300 group-hover:scale-110">
@@ -229,9 +229,25 @@ export default function About() {
                       src="https://flagcdn.com/w20/mg.png"
                       alt="Madagascar"
                       className="h-3 w-4"
-                    />{" "}
-                    <span className="text-sm">(depuis 2022)</span>
+                    />
                   </div>
+                </div>
+              </div>
+              <p className="mt-3 text-sm font-semibold text-gray-700">
+                Zebutech (depuis 2022)
+              </p>
+            </div>
+          </div>
+
+          {/* Stat 3 - Établissements Infhotik */}
+          <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-hover:scale-110">
+              <Building2 className="h-8 w-8 text-orange-600" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="flex min-h-[80px] items-center font-mono text-3xl font-black text-orange-600 transition-all duration-300 md:text-4xl">
+                <div className="space-y-1">
                   <div className="flex items-center justify-center gap-2">
                     {count850}
                     <img
@@ -239,17 +255,16 @@ export default function About() {
                       alt="France"
                       className="h-3 w-4"
                     />
-                    <span className="text-sm">(1999 à 2024)</span>
                   </div>
                 </div>
               </div>
-              <p className="mt-2 font-semibold text-gray-700">
-                Établissements équipés
+              <p className="mt-3 text-sm font-semibold text-gray-700">
+                Infhotik (1999 à 2024)
               </p>
             </div>
           </div>
 
-          {/* Stat 3 - Pays d'intervention */}
+          {/* Stat 4 - Pays d'intervention */}
           <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-50 transition-transform duration-300 group-hover:scale-110">
@@ -265,7 +280,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Stat 4 - Support technique */}
+          {/* Stat 5 - Support technique */}
           <div className="group relative rounded-2xl border border-white/50 bg-white/80 p-8 text-center backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-50 to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 transition-transform duration-300 group-hover:scale-110">

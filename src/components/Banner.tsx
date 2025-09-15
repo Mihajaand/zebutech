@@ -12,9 +12,9 @@ interface Solution {
 
 const solutions: Solution[] = [
   {
-    id: "zebutech",
-    logo: logoZebutech,
-    name: "ZebuTech",
+    id: "kesykely",
+    logo: kesykelyLogo,
+    name: "Kesykely",
   },
   {
     id: "pms",
@@ -22,9 +22,9 @@ const solutions: Solution[] = [
     name: "PMS",
   },
   {
-    id: "kesykely",
-    logo: kesykelyLogo,
-    name: "Kesykely",
+    id: "zebutech",
+    logo: logoZebutech,
+    name: "ZebuTech",
   },
   {
     id: "pos",
@@ -38,7 +38,7 @@ const solutions: Solution[] = [
   },
 ];
 
-export default function Banner(): JSX.Element {
+export default function Banner() {
   // Triple les solutions pour un défilement infini plus fluide
   const duplicatedSolutions = [...solutions, ...solutions, ...solutions];
 

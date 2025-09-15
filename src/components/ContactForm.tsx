@@ -1,4 +1,4 @@
-import { Send } from "lucide-react";
+import { Loader2, Send, Shield } from "lucide-react";
 import { useState } from "react";
 import AsideComponent from "./contact/AsideComponent";
 import { countries } from "../data/tel";
@@ -17,13 +17,28 @@ export default function ContactForm() {
     message: "",
   });
 
+  const [isCaptchaChecked, setIsCaptchaChecked] = useState(false);
+  const [captchaLoading, setCaptchaLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleCaptchaChange = (e) => {
+  //   setIsCaptchaChecked(e.target.checked);
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!isCaptchaChecked) {
+      alert(
+        "Veuillez cocher la case de vérification pour prouver que vous n'êtes pas un robot.",
+      );
+      return;
+    }
+
     alert("Message envoyé ! Nous vous contacterons bientôt.");
     console.log("formData:", formData);
   };
@@ -43,6 +58,20 @@ export default function ContactForm() {
   const selectedCountry = countries.find(
     (c) => c.code === formData.countryCode,
   );
+
+  const handleCaptchaChange = (e) => {
+    const checked = e.target.checked;
+    if (checked) {
+      setCaptchaLoading(true);
+      // Simuler la vérification (ex: 2 secondes)
+      setTimeout(() => {
+        setCaptchaLoading(false);
+        setIsCaptchaChecked(true);
+      }, 1000);
+    } else {
+      setIsCaptchaChecked(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-indigo-50 to-indigo-100">
@@ -247,14 +276,18 @@ export default function ContactForm() {
                           backgroundSize: "18px",
                         }}
                       >
-                        {countries.map((country) => (
-                          <option
-                            key={country.iso}
-                            value={country.code}
-                            className="text-blue-900"
-                          >
-                            {country.name} : {country.code}
-                          </option>
+                        {countries.map((country, index) => (
+                          <div>
+                            <option
+                              key={country.iso}
+                              value={country.code}
+                              className="text-blue-900"
+                            >
+                              {country.name} : {country.code}
+                            </option>
+
+                            {index === 5 && <hr />}
+                          </div>
                         ))}
                       </select>
 
@@ -330,13 +363,67 @@ export default function ContactForm() {
               />
             </div>
 
+            {/* Captcha */}
+            <div className="rounded-xl border-2 border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="relative flex items-center">
+                    <input
+                      type="checkbox"
+                      id="captcha"
+                      checked={isCaptchaChecked}
+                      onChange={handleCaptchaChange}
+                      disabled={captchaLoading} // désactiver pendant le spin
+                      className="h-6 w-6 rounded border-2 border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    />
+
+                    {captchaLoading && (
+                      <Loader2 className="absolute top-0 left-0 h-6 w-6 animate-spin text-indigo-600" />
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <label
+                      htmlFor="captcha"
+                      className="cursor-pointer text-base font-semibold text-gray-700"
+                    >
+                      Je ne suis pas un robot
+                    </label>
+                    <span className="text-sm text-gray-500">
+                      Vérification de sécurité requise
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Shield className="h-8 w-8 text-indigo-500" />
+                  <div className="text-xs text-gray-400">
+                    <div>reCAPTCHA</div>
+                    <div className="flex space-x-1">
+                      <span>Confidentialité</span>
+                      <span>-</span>
+                      <span>Conditions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Submit */}
             <div>
               <button
                 onClick={handleSubmit}
-                className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-3 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 sm:px-8 sm:py-4 sm:text-lg"
+                disabled={!isCaptchaChecked || captchaLoading}
+                className={`flex w-full items-center justify-center rounded-xl px-6 py-3 text-base font-bold shadow-lg transition-all duration-200 sm:px-8 sm:py-4 sm:text-lg ${
+                  isCaptchaChecked && !captchaLoading
+                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:scale-105 hover:from-indigo-600 hover:to-indigo-700"
+                    : "cursor-not-allowed bg-gray-300 text-gray-500"
+                }`}
               >
-                <Send className="mr-2 h-5 w-5 sm:mr-3" /> Envoyer le message
+                <Send className="mr-2 h-5 w-5 sm:mr-3" />
+                {captchaLoading
+                  ? "Vérification en cours..."
+                  : isCaptchaChecked
+                    ? "Envoyer le message"
+                    : "Vérifiez le captcha"}
               </button>
             </div>
           </div>

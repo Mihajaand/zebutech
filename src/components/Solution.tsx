@@ -52,7 +52,7 @@ export default function Solution() {
 
         {/* Section tablette - Image centrée */}
         <div className="mb-16">
-          <div className="mb-8 text-center">
+          <div className="mb-0 text-center">
             <h2 className="mb-4 flex items-center justify-center text-3xl font-bold text-blue-900">
               <BarChart3 className="mr-4 h-8 w-8 text-blue-600" />
               Matériel Professionnel

@@ -7,7 +7,6 @@ import type { Country } from "./CountrySelectorPopup";
 import Meteo from "./Meteo";
 import { FcSettings } from "react-icons/fc";
 import CountrySelectorPopup from "./CountrySelectorPopup";
-import { LocalizationProvider } from "../contexts/LocalizationProvider";
 
 type NavbarProps = {
   onContactClick?: () => void;
@@ -122,7 +121,7 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
                   Site Portail
                 </a>
                 <Link
-                  to="/contact"
+                  to="/actualites"
                   className="px-3 py-2 text-blue-900 transition-colors duration-200 hover:text-indigo-800"
                 >
                   Actualité
@@ -131,7 +130,7 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
 
               <button
                 onClick={onContactClick}
-                className="rounded-md border-2 border-white bg-indigo-900 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-orange-600"
+                className="cursor-pointer rounded-md border-2 border-white bg-indigo-900 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-gray-800"
               >
                 Contactez-nous
               </button>
@@ -192,7 +191,7 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
                     if (onContactClick) onContactClick();
                     closeMenu();
                   }}
-                  className="w-full max-w-xs rounded-md border-2 border-white bg-orange-500 px-6 py-3 text-base font-medium text-white hover:bg-orange-600"
+                  className="w-full max-w-xs cursor-pointer rounded-md border-2 border-white bg-indigo-900 px-6 py-3 text-base font-medium text-white hover:bg-gray-800"
                 >
                   Contactez-nous
                 </button>
