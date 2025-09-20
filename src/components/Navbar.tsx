@@ -106,13 +106,13 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
                     POS
                   </span>
                 </Link>
-                <Link
-                  to="/kesykely-pms"
+                <a
+                  href="https://kesykely-pms.com"
+                  target="_blank"
                   className="px-3 py-2 text-blue-900 transition-colors duration-200 hover:text-indigo-800"
                 >
                   KesyKely <span className="font-bold">PMS</span>
-                </Link>
-
+                </a>
                 <a
                   href="https://madagascar-madagascar.com"
                   target="_blank"
@@ -184,14 +184,14 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
 
           {/* Menu mobile */}
           <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
-            <div className="mt-2 w-full rounded-lg bg-indigo-400 px-4 pt-4 pb-4">
+            <div className="mt-2 mb-4 h-[800px] w-full rounded-lg bg-indigo-400 px-4 pt-4 pb-4">
               <div className="flex flex-col items-center space-y-3">
                 <button
                   onClick={() => {
                     if (onContactClick) onContactClick();
                     closeMenu();
                   }}
-                  className="w-full max-w-xs cursor-pointer rounded-md border-2 border-white bg-indigo-900 px-6 py-3 text-base font-medium text-white hover:bg-gray-800"
+                  className="w-full max-w-xs cursor-pointer rounded-md border-1 border-red-600 bg-indigo-900 px-6 py-3 text-base font-medium text-white hover:bg-gray-800"
                 >
                   Contactez-nous
                 </button>

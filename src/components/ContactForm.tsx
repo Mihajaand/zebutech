@@ -228,7 +228,7 @@ export default function ContactForm() {
                     value={formData.civilite}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    className="w-full cursor-pointer rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
                   >
                     <option value="">--</option>
                     <option value="M.">M.</option>
@@ -400,7 +400,7 @@ export default function ContactForm() {
                       checked={isCaptchaChecked}
                       onChange={handleCaptchaChange}
                       disabled={captchaLoading} // désactiver pendant le spin
-                      className="h-6 w-6 rounded border-2 border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="h-6 w-6 cursor-pointer rounded border-2 border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     />
 
                     {captchaLoading && (
@@ -440,7 +440,7 @@ export default function ContactForm() {
                 disabled={!isCaptchaChecked || captchaLoading}
                 className={`flex w-full items-center justify-center rounded-xl px-6 py-3 text-base font-bold shadow-lg transition-all duration-200 sm:px-8 sm:py-4 sm:text-lg ${
                   isCaptchaChecked && !captchaLoading
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:scale-105 hover:from-indigo-600 hover:to-indigo-700"
+                    ? "cursor-pointer bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:scale-105 hover:from-indigo-600 hover:to-indigo-700"
                     : "cursor-not-allowed bg-gray-300 text-gray-500"
                 }`}
               >

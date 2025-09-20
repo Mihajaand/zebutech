@@ -230,7 +230,7 @@ export default function Carousel() {
         {/* Navigation - Bouton précédent avec couleurs indigo */}
         <button
           onClick={prev}
-          className="absolute top-1/2 left-6 z-20 -translate-y-1/2 rounded-full border border-indigo-300/30 bg-indigo-300/20 p-4 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-500 group-hover:opacity-100 hover:scale-125 hover:rotate-12 hover:bg-indigo-300/30"
+          className="absolute top-1/2 left-6 z-20 -translate-y-1/2 cursor-pointer rounded-full border border-indigo-300/30 bg-indigo-300/20 p-4 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-500 group-hover:opacity-100 hover:scale-125 hover:rotate-12 hover:bg-indigo-300/30"
         >
           <ChevronLeft className="h-8 w-8 text-indigo-300 drop-shadow-lg" />
         </button>
@@ -240,7 +240,7 @@ export default function Carousel() {
           onClick={next}
           className="absolute top-1/2 right-6 z-20 -translate-y-1/2 rounded-full border border-indigo-300/30 bg-indigo-300/20 p-4 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-500 group-hover:opacity-100 hover:scale-125 hover:-rotate-12 hover:bg-indigo-300/30"
         >
-          <ChevronRight className="h-8 w-8 text-indigo-300 drop-shadow-lg" />
+          <ChevronRight className="h-8 w-8 cursor-pointer text-indigo-300 drop-shadow-lg" />
         </button>
 
         {/* Indicateurs de progression - Couleurs indigo */}

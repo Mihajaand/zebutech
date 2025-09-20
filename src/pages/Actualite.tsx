@@ -237,7 +237,7 @@ const Actualite = () => {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                    className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-all ${
                       selectedCategory === category
                         ? "bg-indigo-600 text-white shadow-md"
                         : "bg-gray-100 text-gray-600 hover:bg-indigo-100"

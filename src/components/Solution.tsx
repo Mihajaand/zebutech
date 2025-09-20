@@ -235,7 +235,7 @@ export default function Solution() {
               </div>
             </div>
 
-            <button className="flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-all duration-300 hover:bg-blue-700 md:px-6 md:py-3 md:text-base">
+            <button className="flex cursor-pointer items-center rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-all duration-300 hover:bg-blue-700 md:px-6 md:py-3 md:text-base">
               En savoir plus
               <ArrowRight className="ml-2 h-4 w-4" />
             </button>
@@ -288,7 +288,7 @@ export default function Solution() {
               </div>
             </div>
 
-            <button className="flex items-center rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-all duration-300 hover:bg-green-700 md:px-6 md:py-3 md:text-base">
+            <button className="flex cursor-pointer items-center rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-all duration-300 hover:bg-green-700 md:px-6 md:py-3 md:text-base">
               Découvrir
               <ArrowRight className="ml-2 h-4 w-4" />
             </button>
