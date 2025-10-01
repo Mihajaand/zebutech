@@ -41,7 +41,7 @@ export default function Solution() {
             <img
               src={planning}
               alt="Matériel KESYKELY"
-              className="h-auto w-[1400px] rounded-2xl transition-transform duration-500 hover:scale-105"
+              className="h-auto w-[1200px] rounded-2xl transition-transform duration-500 hover:scale-105"
             />
           </div>
         </div>
@@ -54,7 +54,8 @@ export default function Solution() {
               Matériel Professionnel
             </h2>
             <p className="text-lg text-blue-800">
-              Hardware optimisé pour les environnements professionnels exigeants
+              Hardware optimisé pour les environnements professionnels et
+              multi-plateformes exigeants
             </p>
           </div>
 

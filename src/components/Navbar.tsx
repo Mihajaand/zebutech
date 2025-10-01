@@ -221,11 +221,11 @@ export function NavbarComponent({ onContactClick }: NavbarProps) {
                   Site Portail
                 </Link>
                 <Link
-                  to="/contact"
+                  to="/actualites"
                   onClick={closeMenu}
                   className="w-full max-w-xs rounded-md px-4 py-3 text-center text-blue-900 hover:bg-indigo-200 hover:text-indigo-800"
                 >
-                  Contact
+                  Actualités
                 </Link>
 
                 {/* Date/heure mobile */}

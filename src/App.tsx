@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Actualite from "./pages/Actualite";
 import NotFound from "./pages/NotFound";
 import { useRef } from "react";
+import ContactForm from "./components/ContactForm";
 
 export default function App() {
   const contactRef = useRef<any>(null);
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/home" element={<Home contactRef={contactRef} />} />
           <Route path="/actualites" element={<Actualite />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Routes>
       </PaysProvider>
     </div>

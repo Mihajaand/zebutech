@@ -49,7 +49,7 @@ const ModernCookieConsent = () => {
             </div>
             <button
               onClick={handleClose}
-              className="rounded-full p-2 transition-colors hover:bg-gray-100"
+              className="cursor-pointer rounded-full p-2 transition-colors hover:bg-indigo-50"
             >
               <X className="h-5 w-5 text-gray-500" />
             </button>

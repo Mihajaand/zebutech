@@ -176,7 +176,7 @@ const Actualite = () => {
   };
 
   const stats = [
-    { icon: Users, label: "Événements", value: "+15" },
+    { icon: Users, label: "Actualités", value: "+15" },
     { icon: Award, label: "Partenariats", value: "+8" },
     { icon: TrendingUp, label: "Années d'expertise", value: "+35" },
   ];
