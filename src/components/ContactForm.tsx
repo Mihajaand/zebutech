@@ -1,7 +1,15 @@
 import { Loader2, Send, Shield } from "lucide-react";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 import AsideComponent from "./contact/AsideComponent";
 import { countries } from "../data/tel";
+
+// Configuration EmailJS - REMPLACEZ PAR VOS VALEURS
+const EMAILJS_CONFIG = {
+  serviceId: 'service_4zr77vb',
+  templateId: 'template_8jzg1jc',
+  publicKey: 'S15j2Leo9p1p-x7Pz'
+};
 
 // Interface pour les données du formulaire
 interface FormData {
@@ -40,6 +48,7 @@ export default function ContactForm() {
 
   const [isCaptchaChecked, setIsCaptchaChecked] = useState<boolean>(false);
   const [captchaLoading, setCaptchaLoading] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -50,7 +59,7 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (
+  const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
@@ -62,8 +71,62 @@ export default function ContactForm() {
       return;
     }
 
-    alert("Message envoyé ! Nous vous contacterons bientôt.");
-    console.log("formData:", formData);
+    setIsSubmitting(true);
+
+    try {
+      // Préparer les données pour EmailJS
+      const templateParams = {
+        type_etablissement: formData.type,
+        nom_etablissement: formData.nom,
+        lieu: formData.lieu,
+        parrain: formData.parrain || 'Non spécifié',
+        civilite: formData.civilite,
+        nom_prenom: formData.nomPrenom,
+        email: formData.email,
+        telephone: `${formData.countryCode} ${formData.telephone}`,
+        message: formData.message || 'Pas de message',
+        date: new Date().toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }),
+      };
+
+      // Envoyer l'email via EmailJS
+      const response = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        templateParams,
+        EMAILJS_CONFIG.publicKey
+      );
+
+      if (response.status === 200) {
+        alert("Message envoyé ! Nous vous contacterons bientôt.");
+        console.log("formData:", formData);
+        
+        // Réinitialiser le formulaire
+        setFormData({
+          type: "",
+          nom: "",
+          lieu: "",
+          parrain: "",
+          civilite: "",
+          nomPrenom: "",
+          email: "",
+          countryCode: "+261",
+          telephone: "",
+          message: "",
+        });
+        setIsCaptchaChecked(false);
+      }
+    } catch (error: any) {
+      console.error('Erreur EmailJS:', error);
+      alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const typeOptions = [
@@ -139,7 +202,8 @@ export default function ContactForm() {
                     value={formData.type}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     <option value="">
                       Sélectionnez votre type d'établissement
@@ -168,7 +232,8 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Nom de votre établissement"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -188,7 +253,8 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Ville, région..."
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -207,7 +273,8 @@ export default function ContactForm() {
                     value={formData.parrain}
                     onChange={handleChange}
                     placeholder="Établissement ou personne qui vous a conseillé"
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
@@ -228,7 +295,8 @@ export default function ContactForm() {
                     value={formData.civilite}
                     onChange={handleChange}
                     required
-                    className="w-full cursor-pointer rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full cursor-pointer rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     <option value="">--</option>
                     <option value="M.">M.</option>
@@ -252,7 +320,8 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Votre nom et prénom"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -272,7 +341,8 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="votre@email.com"
                     required
-                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -291,7 +361,8 @@ export default function ContactForm() {
                         name="countryCode"
                         value={formData.countryCode}
                         onChange={handleChange}
-                        className="h-full w-[120px] cursor-pointer appearance-none rounded-xl border-2 border-gray-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 py-3 pr-9 pl-14 text-transparent transition-all duration-200 hover:shadow-md focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                        disabled={isSubmitting}
+                        className="h-full w-[120px] cursor-pointer appearance-none rounded-xl border-2 border-gray-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 py-3 pr-9 pl-14 text-transparent transition-all duration-200 hover:shadow-md focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                         style={{
                           backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
                           backgroundRepeat: "no-repeat",
@@ -348,7 +419,8 @@ export default function ContactForm() {
                       onChange={handleChange}
                       placeholder="034 34 334 34"
                       required
-                      className="w-[200px] flex-1 rounded-xl border-2 border-gray-200 px-4 py-3 font-mono text-lg tracking-wider text-gray-900 transition-all duration-200 hover:border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                      disabled={isSubmitting}
+                      className="w-[200px] flex-1 rounded-xl border-2 border-gray-200 px-4 py-3 font-mono text-lg tracking-wider text-gray-900 transition-all duration-200 hover:border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
 
@@ -360,7 +432,8 @@ export default function ContactForm() {
                           type="checkbox"
                           name="choix"
                           value="oui"
-                          className="form-radio text-md accent-green-500"
+                          disabled={isSubmitting}
+                          className="form-radio text-md accent-green-500 disabled:cursor-not-allowed"
                         />
                         Ce numéro à un compte WhatsApp ?
                       </label>
@@ -385,7 +458,8 @@ export default function ContactForm() {
                 onChange={handleChange}
                 rows={5}
                 placeholder="Décrivez vos besoins spécifiques..."
-                className="w-full resize-none rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none"
+                disabled={isSubmitting}
+                className="w-full resize-none rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-900 transition-colors focus:border-indigo-400 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -399,8 +473,8 @@ export default function ContactForm() {
                       id="captcha"
                       checked={isCaptchaChecked}
                       onChange={handleCaptchaChange}
-                      disabled={captchaLoading} // désactiver pendant le spin
-                      className="h-6 w-6 cursor-pointer rounded border-2 border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      disabled={captchaLoading || isSubmitting}
+                      className="h-6 w-6 cursor-pointer rounded border-2 border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed"
                     />
 
                     {captchaLoading && (
@@ -437,19 +511,28 @@ export default function ContactForm() {
             <div>
               <button
                 type="submit"
-                disabled={!isCaptchaChecked || captchaLoading}
+                disabled={!isCaptchaChecked || captchaLoading || isSubmitting}
                 className={`flex w-full items-center justify-center rounded-xl px-6 py-3 text-base font-bold shadow-lg transition-all duration-200 sm:px-8 sm:py-4 sm:text-lg ${
-                  isCaptchaChecked && !captchaLoading
+                  isCaptchaChecked && !captchaLoading && !isSubmitting
                     ? "cursor-pointer bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:scale-105 hover:from-indigo-600 hover:to-indigo-700"
                     : "cursor-not-allowed bg-gray-300 text-gray-500"
                 }`}
               >
-                <Send className="mr-2 h-5 w-5 sm:mr-3" />
-                {captchaLoading
-                  ? "Vérification en cours..."
-                  : isCaptchaChecked
-                    ? "Envoyer le message"
-                    : "Vérifiez le captcha"}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin sm:mr-3" />
+                    Envoi en cours...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-5 w-5 sm:mr-3" />
+                    {captchaLoading
+                      ? "Vérification en cours..."
+                      : isCaptchaChecked
+                        ? "Envoyer le message"
+                        : "Vérifiez le captcha"}
+                  </>
+                )}
               </button>
             </div>
           </form>
